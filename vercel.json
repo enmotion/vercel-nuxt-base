@@ -3,14 +3,9 @@
   "framework": "nuxtjs",
   "buildCommand": "nuxt build",
   "outputDirectory": ".output",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "nuxt dev",
   "regions": ["hkg1"],
-  "functions": {
-    "server/**/*.ts": {
-      "maxDuration": 30
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
