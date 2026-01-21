@@ -1,0 +1,77 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "confirm": "Confirm",
+    "search": "Search",
+    "loading": "Loading...",
+    "noData": "No data",
+    "success": "Operation successful",
+    "error": "Operation failed",
+    "back": "Back",
+    "submit": "Submit",
+    "reset": "Reset"
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?"
+  },
+  "posts": {
+    "title": "Posts",
+    "create": "Create Post",
+    "edit": "Edit Post",
+    "list": "Post List",
+    "published": "Published",
+    "draft": "Draft",
+    "viewCount": "Views",
+    "publishedAt": "Published at",
+    "createdAt": "Created at"
+  },
+  "messages": {
+    "title": "Messages",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "content": "Content",
+    "send": "Send Message",
+    "success": "Message sent successfully!",
+    "unread": "Unread",
+    "read": "Read"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "language": "Language",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode",
+    "systemMode": "System",
+    "primaryColor": "Primary Color"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "posts": "Posts",
+    "media": "Media",
+    "messages": "Messages",
+    "users": "Users",
+    "settings": "Settings"
+  },
+  "footer": {
+    "copyright": "© {year} {name}. All rights reserved."
+  }
+}

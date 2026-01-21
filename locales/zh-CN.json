@@ -1,0 +1,77 @@
+{
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "创建",
+    "confirm": "确认",
+    "search": "搜索",
+    "loading": "加载中...",
+    "noData": "暂无数据",
+    "success": "操作成功",
+    "error": "操作失败",
+    "back": "返回",
+    "submit": "提交",
+    "reset": "重置"
+  },
+  "nav": {
+    "home": "首页",
+    "blog": "博客",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "auth": {
+    "login": "登录",
+    "logout": "退出登录",
+    "register": "注册",
+    "email": "邮箱",
+    "password": "密码",
+    "rememberMe": "记住我",
+    "forgotPassword": "忘记密码?"
+  },
+  "posts": {
+    "title": "文章管理",
+    "create": "创建文章",
+    "edit": "编辑文章",
+    "list": "文章列表",
+    "published": "已发布",
+    "draft": "草稿",
+    "viewCount": "阅读量",
+    "publishedAt": "发布时间",
+    "createdAt": "创建时间"
+  },
+  "messages": {
+    "title": "留言管理",
+    "name": "姓名",
+    "email": "邮箱",
+    "subject": "主题",
+    "content": "内容",
+    "send": "发送留言",
+    "success": "留言发送成功！",
+    "unread": "未读",
+    "read": "已读"
+  },
+  "settings": {
+    "title": "系统设置",
+    "general": "基本设置",
+    "appearance": "外观设置",
+    "theme": "主题",
+    "language": "语言",
+    "lightMode": "亮色模式",
+    "darkMode": "暗色模式",
+    "systemMode": "跟随系统",
+    "primaryColor": "主题色"
+  },
+  "admin": {
+    "dashboard": "仪表盘",
+    "posts": "文章",
+    "media": "媒体",
+    "messages": "留言",
+    "users": "用户",
+    "settings": "设置"
+  },
+  "footer": {
+    "copyright": "© {year} {name}. 保留所有权利。"
+  }
+}
