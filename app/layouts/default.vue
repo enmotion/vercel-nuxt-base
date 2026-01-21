@@ -5,13 +5,13 @@ const localePath = useLocalePath()
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
+  <div class="min-h-screen flex flex-col bg-background">
     <!-- Header -->
-    <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div class="container flex h-14 items-center">
+    <header class="sticky top-0 z-50 w-full flex flex-row justify-center border-b bg-background/95 backdrop-blur">
+      <div class="container flex h-14 max-w-7xl">
         <!-- Logo -->
         <NuxtLink :to="localePath('/')" class="mr-6 flex items-center space-x-2">
-          <span class="text-xl font-bold text-primary">CMS</span>
+          <span class="text-xl font-bold text-primary">CMS111</span>
         </NuxtLink>
 
         <!-- Navigation -->
