@@ -8,7 +8,7 @@ const localePath = useLocalePath()
   <div class="min-h-screen flex flex-col bg-background">
     <!-- Header -->
     <header class="sticky top-0 z-50 w-full flex flex-row justify-center border-b bg-background/95 backdrop-blur">
-      <div class="container flex h-14 max-w-[1024px] px-[30px]">
+      <div class="container max-w-[1024px] flex h-14 ">
         <!-- Logo -->
         <NuxtLink :to="localePath('/')" class="mr-6 flex items-center space-x-2">
           <span class="text-xl font-bold text-primary">CMS111</span>
@@ -59,14 +59,14 @@ const localePath = useLocalePath()
 
     <!-- Main Content -->
     <main class="flex flex-col flex-1 items-center">
-      <div class="max-w-[1024px] flex flex-col grow">
+      <div class="container flex flex-col grow">
          <slot />
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="sticky top-0 z-50 w-full flex flex-row justify-center border-t bg-background/95 backdrop-blur">
-      <div class="container flex h-14 max-w-[1024px] px-[30px] flex-row items-center justify-center font-thin text-sm">
+    <footer class="sticky  top-0 z-50 w-full flex flex-row justify-center border-t bg-background/95 backdrop-blur">
+      <div class="container max-w-[1024px] flex h-14 flex-row items-center justify-center font-thin!">
         {{ t('footer.copyright', { year: new Date().getFullYear(), name: 'My CMS' }) }}
       </div>
     </footer>

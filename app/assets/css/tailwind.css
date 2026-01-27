@@ -150,15 +150,7 @@
   to { height: 0; }
 }
 
-/* High-specificity overrides to prevent runtime injection from overwriting */
-/* html:root {
-  --primary: oklch(62.852% 0.25707 29.148) !important;
-  --primary-foreground: oklch(0.985 0 0) !important;
+.container{
+  @apply p-[30px];
 }
-
-html:root.dark {
-  --primary: oklch(62.793% 0.25768 29.223) !important;
-  --primary-foreground: oklch(0.205 0 0) !important;
-} */
-
 

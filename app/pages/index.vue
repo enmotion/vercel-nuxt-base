@@ -11,7 +11,7 @@ useSeoMeta({
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="container py-24 md:py-32">
+    <section class="py-24 md:py-32">
       <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
         <h1 class="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
           Welcome to
