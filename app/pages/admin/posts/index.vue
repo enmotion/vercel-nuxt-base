@@ -7,11 +7,33 @@ definePageMeta({
 })
 
 // 文章列表
-const posts = ref([
-  { id: '1', title: '开始使用 Nuxt 3', slug: 'getting-started-with-nuxt3', status: 'published', publishedAt: '2026-01-20', views: 128 },
-  { id: '2', title: 'Tailwind CSS v4 新特性', slug: 'tailwind-css-v4-features', status: 'published', publishedAt: '2026-01-18', views: 256 },
-  { id: '3', title: 'Drizzle ORM 入门', slug: 'drizzle-orm-guide', status: 'draft', publishedAt: null, views: 0 },
-])
+interface Post {
+  id: string
+  title: string
+  status: 'published' | 'draft'
+  publishedAt: string | null
+  views: number
+  slug: string
+}
+
+interface ApiResponse {
+  code: number
+  msg: string
+  data: {
+    items: Post[]
+    total: number
+  }
+}
+
+const { data: fetchResult, refresh } = await useFetch<ApiResponse>('/api/posts', {
+  query: { 
+    limit: 100, // 暂时获取较多数据，后续应该做分页
+    status: undefined // 全部状态
+  },
+  key: 'admin-posts'
+})
+
+const posts = computed(() => fetchResult.value?.data?.items || [])
 
 const selectedPosts = ref<string[]>([])
 const searchQuery = ref('')
@@ -19,7 +41,7 @@ const statusFilter = ref('all')
 
 // 过滤文章
 const filteredPosts = computed(() => {
-  return posts.value.filter(post => {
+  return posts.value.filter((post) => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.value.toLowerCase())
     const matchesStatus = statusFilter.value === 'all' || post.status === statusFilter.value
     return matchesSearch && matchesStatus
@@ -27,9 +49,15 @@ const filteredPosts = computed(() => {
 })
 
 // 删除文章
-const handleDelete = (id: string) => {
+const handleDelete = async (id: string) => {
   if (confirm('确定要删除这篇文章吗？')) {
-    posts.value = posts.value.filter(p => p.id !== id)
+    try {
+      await $fetch(`/api/posts/${id}`, { method: 'DELETE' })
+      // 刷新列表
+      refresh()
+    } catch (error: any) {
+      alert(error.message || '删除失败')
+    }
   }
 }
 
@@ -51,7 +79,7 @@ useSeoMeta({
         :to="localePath('/admin/posts/create')"
         class="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground hover:bg-primary/90"
       >
-        <Icon icon="lucide:plus" class="h-4 w-4" />
+        <Icon icon="lucide:plus" class="h-4 w-4 " />
         {{ t('posts.create') }}
       </NuxtLink>
     </div>

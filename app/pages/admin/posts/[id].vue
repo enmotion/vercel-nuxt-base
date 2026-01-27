@@ -6,6 +6,8 @@ import { Textarea } from '~/components/ui/textarea'
 const { t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
+const route = useRoute()
+const id = route.params.id as string
 
 definePageMeta({
   layout: 'admin',
@@ -24,9 +26,47 @@ const form = reactive({
 })
 
 const isSubmitting = ref(false)
+const isLoading = ref(true)
 
-// 自动生成 slug
+// 获取文章详情
+interface PostDetail {
+  title: string
+  slug: string
+  excerpt: string | null
+  content: string | null
+  coverImage: string | null
+  status: 'draft' | 'published'
+  metaTitle: string | null
+  metaDescription: string | null
+}
+
+interface ApiDetailResponse {
+  code: number
+  msg: string
+  data: PostDetail
+}
+
+const { data: fetchResult, error } = await useFetch<ApiDetailResponse>(`/api/posts/${id}`)
+
+if (fetchResult.value?.data) {
+  const post = fetchResult.value.data
+  form.title = post.title
+  form.slug = post.slug
+  form.excerpt = post.excerpt || ''
+  form.content = post.content || ''
+  form.coverImage = post.coverImage || ''
+  form.status = post.status
+  form.metaTitle = post.metaTitle || ''
+  form.metaDescription = post.metaDescription || ''
+  isLoading.value = false
+} else if (error.value) {
+  alert('加载文章失败')
+  router.push(localePath('/admin/posts'))
+}
+
+// 自动生成 slug (仅当 slug 为空且正在输入标题时)
 watch(() => form.title, (title) => {
+  // 编辑模式下通常不自动修改已有的 slug，除非用户清空了
   if (!form.slug) {
     form.slug = title
       .toLowerCase()
@@ -42,11 +82,10 @@ const handleSubmit = async () => {
   isSubmitting.value = true
   
   try {
-    await $fetch('/api/posts', {
-      method: 'POST',
+    await $fetch(`/api/posts/${id}`, {
+      method: 'PUT',
       body: {
         ...form,
-        // 如果没有设置发布时间且状态为已发布，由后端处理
       }
     })
     
@@ -56,9 +95,9 @@ const handleSubmit = async () => {
     // 成功后跳转到文章列表
     router.push(localePath('/admin/posts'))
   } catch (error: any) {
-    console.error('Failed to create post:', error)
+    console.error('Failed to update post:', error)
     // 失败提示
-    alert(error.message || 'Failed to create post')
+    alert(error.message || 'Failed to update post')
   } finally {
     isSubmitting.value = false
   }
@@ -66,7 +105,7 @@ const handleSubmit = async () => {
 
 // SEO
 useSeoMeta({
-  title: `${t('posts.create')} - My CMS`,
+  title: `${t('posts.edit')} - My CMS`,
 })
 </script>
 
@@ -82,7 +121,7 @@ useSeoMeta({
           <Icon icon="lucide:arrow-left" class="mr-1 h-4 w-4" />
           返回文章列表
         </NuxtLink>
-        <h1 class="text-2xl font-bold">{{ t('posts.create') }}</h1>
+        <h1 class="text-2xl font-bold">{{ t('posts.edit') }}</h1>
       </div>
       <div class="flex gap-2">
         <Button variant="outline" @click="router.back()">
@@ -99,7 +138,13 @@ useSeoMeta({
       </div>
     </div>
 
-    <form class="grid gap-6 lg:grid-cols-3" @submit.prevent="handleSubmit">
+    <!-- Loading State -->
+    <div v-if="isLoading" class="py-12 text-center text-muted-foreground">
+      <Icon icon="lucide:loader-2" class="mx-auto h-8 w-8 animate-spin" />
+      <p class="mt-2">正在加载...</p>
+    </div>
+
+    <form v-else class="grid gap-6 lg:grid-cols-3" @submit.prevent="handleSubmit">
       <!-- Main Content -->
       <div class="space-y-6 lg:col-span-2">
         <!-- Title -->

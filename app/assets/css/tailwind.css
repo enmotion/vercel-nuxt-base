@@ -5,10 +5,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -40,6 +43,13 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Font Family */
+  --font-sans: Inter, system-ui, sans-serif;
+
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
 :root {
@@ -50,8 +60,8 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: oklch(62.793% 0.25768 29.223) !important;
+  --primary-foreground: oklch(0.985 0 0) !important;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -77,15 +87,15 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+:root.dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.985 0 0) !important;
+  --primary-foreground: oklch(0.205 0 0) !important;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -115,7 +125,40 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html, body, #__nuxt {
+    @apply h-full;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
+  
+  #__nuxt {
+    @apply flex flex-col;
+  }
 }
+
+/* Keyframes for animations */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* High-specificity overrides to prevent runtime injection from overwriting */
+/* html:root {
+  --primary: oklch(62.852% 0.25707 29.148) !important;
+  --primary-foreground: oklch(0.985 0 0) !important;
+}
+
+html:root.dark {
+  --primary: oklch(62.793% 0.25768 29.223) !important;
+  --primary-foreground: oklch(0.205 0 0) !important;
+} */
+
+

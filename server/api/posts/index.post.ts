@@ -5,8 +5,9 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event)
     
-    // TODO: 获取当前用户 ID
-    const userId = null
+    // TODO: 获取当前用户 ID (临时硬编码，后续对接 Auth)
+    // 假设 Admin 用户的 ID 是固定的，或者暂时允许 null
+    const userId = null // 或者填入您数据库中真实的 admin user id
     
     const post = await PostsService.create({
       title: body.title,
